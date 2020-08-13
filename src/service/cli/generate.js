@@ -2,11 +2,11 @@
 
 const fs = require(`fs`);
 const {
-    getRandomInt,
-    shuffle,
-  } = require(`../../utils`);
+  getRandomInt,
+  shuffle,
+} = require(`../../utils`);
 
-const { ExitCode } = require(`../../constants`);
+const {ExitCode} = require(`../../constants`);
 
 const DEFAULT_COUNT = 1;
 const FILE_NAME = `mocks.json`;
@@ -64,15 +64,15 @@ const getPictureFileName = (number) => {
 };
 
 const generateOffers = (count) => (
-    Array(count).fill({}).map(() => ({
-      title: TITLES[getRandomInt(0, TITLES.length - 1)],
-      picture: getPictureFileName(getRandomInt(PictureRestrict.MIN, PictureRestrict.MAX)),
-      description: shuffle(SENTENCES).slice(1, SENTENCES_COUNT).join(` `),
-      type: Object.values(OfferType)[Math.floor(Math.random() * Object.values(OfferType).length)],
-      sum: getRandomInt(SumRestrict.MIN, SumRestrict.MAX),
-      category: [CATEGORIES[getRandomInt(0, CATEGORIES.length - 1)]],
-    }))
-  );
+  Array(count).fill({}).map(() => ({
+    title: TITLES[getRandomInt(0, TITLES.length - 1)],
+    picture: getPictureFileName(getRandomInt(PictureRestrict.MIN, PictureRestrict.MAX)),
+    description: shuffle(SENTENCES).slice(1, SENTENCES_COUNT).join(` `),
+    type: Object.values(OfferType)[Math.floor(Math.random() * Object.values(OfferType).length)],
+    sum: getRandomInt(SumRestrict.MIN, SumRestrict.MAX),
+    category: [CATEGORIES[getRandomInt(0, CATEGORIES.length - 1)]],
+  }))
+);
 
 module.exports = {
   name: `--generate`,
@@ -82,13 +82,13 @@ module.exports = {
     const content = JSON.stringify(generateOffers(countOffer));
 
     fs.writeFile(FILE_NAME, content, (err) => {
-        if (err) {
-          console.error(`Can't write data to file...`);
-          process.exit(ExitCode.error);
-        }
-      
-       console.info(`Operation success. File created.`);
-       process.exit(ExitCode.success);
-      });
+      if (err) {
+        console.error(`Can't write data to file...`);
+        process.exit(ExitCode.error);
+      }
+
+      console.info(`Operation success. File created.`);
+      process.exit(ExitCode.success);
+    });
   }
-}
+};
