@@ -9,6 +9,7 @@ const {
 const {ExitCode} = require(`../../constants`);
 
 const DEFAULT_COUNT = 1;
+const MAX_COUNT = 1000;
 const FILE_NAME = `mocks.json`;
 
 const TITLES = [
@@ -79,6 +80,12 @@ module.exports = {
   run(args) {
     const [count] = args;
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
+
+    if (countOffer > MAX_COUNT) {
+      console.info(`Не больше ${MAX_COUNT} публикаций`);
+      process.exit(ExitCode.error);
+    }
+
     const content = JSON.stringify(generateOffers(countOffer));
 
     fs.writeFile(FILE_NAME, content, (err) => {
