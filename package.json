@@ -20,6 +20,10 @@
   "homepage": "https://github.com/inchernobuk/1506063-buy-and-sell-3#readme",
   "devDependencies": {
     "eslint": "7.4.0",
-    "eslint-config-htmlacademy": "0.5.2"
+    "eslint-config-htmlacademy": "0.5.2",
+    "nodemon": "2.0.4"
+  },
+  "dependencies": {
+    "chalk": "4.1.0"
   }
 }
